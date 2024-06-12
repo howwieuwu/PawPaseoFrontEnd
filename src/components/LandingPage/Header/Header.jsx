@@ -5,6 +5,7 @@ import Paw from "@/../public/image/Paw.png";
 import { RiMenu2Line } from "react-icons/ri";
 
 export const Header = () => {
+    
     return (
         <nav id="inicio" className="py-2 xl:py-5 w-full bg-[#e2e1e1] max-sm:h-[8vh]">
             <div className="flex items-center justify-between px-4 xl:px-6 mx-auto">

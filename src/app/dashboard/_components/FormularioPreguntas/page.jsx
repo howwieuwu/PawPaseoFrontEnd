@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BiShow } from "react-icons/bi";
 import { FaSearch } from "react-icons/fa";
 import { TbEdit } from "react-icons/tb";
+import { SiDatadog } from "react-icons/si";
 import Swal from 'sweetalert2';
 
 export default function Page() {
@@ -13,6 +14,7 @@ export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenVer, setIsModalOpenVer] = useState(false);
   const [preguntaVer, setPreguntaVer] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const [rowsPerPage] = useState(7); 
   const [totalPages, setTotalPages] = useState(0);
@@ -49,7 +51,9 @@ export default function Page() {
   });
 
   useEffect(() => {
+    setLoading(false);
     fetchData();
+    
   }, []);
 
   const handleSearch = (event) => {
@@ -104,6 +108,16 @@ export default function Page() {
     currentPage * rowsPerPage
   );
 
+  if (loading) {
+
+    return <div className='flex justify-center items-center animate-pulse'> 
+    <div className=' h-full w-full mt-72 md:mt-20'>
+    <SiDatadog className='h-96 w-full'/> 
+    <h1 className='w-full flex text-center justify-center'> Cargando... </h1>
+    </div>
+    </div>
+}
+
   return (
     <div>
       <div className="flex justify-end mt-2">
@@ -118,7 +132,7 @@ export default function Page() {
           <FaSearch className='h-6 w-6 absolute top-1/2 left-4 transform -translate-y-1/2 text-black' />
         </div>
       </div>
-
+      <div className='overflow-x-auto'>
       <table className="w-full text-sm border-y-2 mt-3">
         <thead className="text-xs uppercase bg-gray-50 border-y-2">
           <tr className='h-20'>
@@ -134,7 +148,7 @@ export default function Page() {
             <tr key={pregunta._id} className='h-14 border-y-2'>
               <td>{(currentPage - 1 ) * rowsPerPage + index + 1}</td>
               <td>{pregunta.descripcion}</td>
-              <td>{pregunta.respuesta || 'Sin respuesta'}</td>
+              <td>{pregunta.respuesta || 'Sin respuesta' }</td>
               <td className='flex justify-center'>
                 <BiShow className='h-8 w-8 cursor-pointer' onClick={() => handleView(pregunta)}/>
                 <TbEdit className='h-8 w-8 cursor-pointer ml-2' onClick={() => handleEdit(pregunta)} />
@@ -143,7 +157,7 @@ export default function Page() {
           ))}
         </tbody>
       </table>
-
+      </div>
       <div className="flex justify-center mt-4">
         <button
           onClick={() => handlePageChange(currentPage - 1)}

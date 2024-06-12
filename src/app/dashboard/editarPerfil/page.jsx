@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import UsuG from "@/../public/icon/OBJECTS.png";
+import { SiDatadog } from "react-icons/si";
 import axios from 'axios';
 
 function Page() {
@@ -23,7 +24,7 @@ function Page() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         const updatedData = {
             nombre: event.target.nombre.value,
             apellido: event.target.apellido.value,
@@ -34,7 +35,7 @@ function Page() {
         axios.put(`https://prueba-backend-phi.vercel.app/admin/update/${admin._id}`, updatedData, { withCredentials: true })
             .then(response => {
                 console.log('Admin updated:', response.data);
-    
+
             })
             .catch(error => {
                 console.error('Error updating admin:', error);
@@ -42,7 +43,13 @@ function Page() {
     };
 
     if (loading) {
-        return <div>Cargando...</div>;
+
+        return <div className='flex justify-center items-center animate-pulse'> 
+        <div className=' h-full w-full mt-72 md:mt-20'>
+        <SiDatadog className='h-96 w-full'/> 
+        <h1 className='w-full flex text-center justify-center'> Cargando... </h1>
+        </div>
+        </div>
     }
 
     return (
@@ -53,25 +60,19 @@ function Page() {
             </div>
             <div className='w-full mt-3'>
                 <form onSubmit={handleSubmit}>
-                    <div className='flex justify-around'>
-                        <div className="mb-4 w-80">
-                            <label className="block mb-2">Nombre:</label>
-                            <input type="text" name="nombre" defaultValue={admin.nombre} className="p-2 border rounded w-full" />
-                        </div>
-                        <div className="mb-4 w-80">
-                            <label className="block mb-2">Apellido:</label>
-                            <input type="text" name="apellido" defaultValue={admin.apellido} className="p-2 border rounded w-full" />
-                        </div>
+                    <div className="mb-4 w-80 md:w-[930px] mx-auto">
+                        <label className="block mb-2">Nombre:</label>
+                        <input type="text" name="nombre" defaultValue={admin.nombre} className="p-2 border rounded w-full" />
                     </div>
-                    <div className="mb-4 w-[930px] mx-auto">
+                    <div className="mb-4 w-80 md:w-[930px] mx-auto">
                         <label className="block mb-2">Correo:</label>
                         <input type="email" name="correo" defaultValue={admin.email} className="p-2 border rounded w-full" />
                     </div>
-                    <div className="mb-4 w-[930px] mx-auto">
+                    <div className="mb-4 w-80 md:w-[930px] mx-auto">
                         <label className="block mb-2">Ciudad:</label>
                         <input type="text" name="ciudad" defaultValue={admin.ciudad} className="p-2 border rounded w-full" />
                     </div>
-                    <div className="mb-4 w-[930px] mx-auto">
+                    <div className="mb-4 w-80 md:w-[930px] mx-auto">
                         <label className="block mb-2">Contraseña:</label>
                         <input type="password" name="contraseña" defaultValue={admin.contraseña} className="p-2 border rounded w-full" />
                     </div>

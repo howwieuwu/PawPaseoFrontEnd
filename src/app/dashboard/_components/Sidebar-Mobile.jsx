@@ -5,33 +5,37 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Iconos
-import { RiHome2Line } from "react-icons/ri";
+import { RiHome2Fill} from "react-icons/ri";
+import { FaUserTie } from "react-icons/fa";
+import { FaWalking } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa";
 
 const ArrayElements = [
   {
     name: "Home",
-    Icon: RiHome2Line,
+    Icon: RiHome2Fill,
     link: "/dashboard",
   },
   {
     name: "Administradores",
-    Icon: RiHome2Line,
+    Icon: FaUserTie,
     link: "/dashboard/administradores",
   },
   {
     name: "Cuidadores",
-    Icon: RiHome2Line,
+    Icon: FaWalking,
     link: "/dashboard/cuidadores",
   },
   {
     name: "Usuarios",
-    Icon: RiHome2Line,
+    Icon: FaUser,
     link: "/dashboard/usuarios",
   },
 
   {
     name: "Preguntas Frecuentes",
-    Icon: RiHome2Line,
+    Icon: FaQuestion,
     link: "/dashboard/preguntas",
   },
 ];

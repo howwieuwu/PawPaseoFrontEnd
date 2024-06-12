@@ -2,37 +2,39 @@
 import UsuG from "@/../public/icon/objects.png";
 import Image from "next/image";
 import Link from "next/link";
-import { RiHome2Line } from "react-icons/ri";
+
+// Iconos
+import { RiHome2Fill} from "react-icons/ri";
+import { FaQuestion, FaUser, FaUserTie, FaWalking } from "react-icons/fa";
 
 const ArrayElements = [
   {
     name: "Home",
-    Icon: RiHome2Line,
+    Icon: RiHome2Fill,
     link: "/dashboard",
   },
   {
     name: "Administradores",
-    Icon: RiHome2Line,
+    Icon: FaUserTie,
     link: "/dashboard/administradores",
   },
   {
     name: "Cuidadores",
-    Icon: RiHome2Line,
+    Icon: FaWalking,
     link: "/dashboard/cuidadores",
   },
   {
     name: "Usuarios",
-    Icon: RiHome2Line,
+    Icon: FaUser,
     link: "/dashboard/usuarios",
   },
 
   {
     name: "Preguntas",
-    Icon: RiHome2Line,
+    Icon: FaQuestion,
     link: "/dashboard/preguntas",
   },
 ];
-
 export const Sidebar = () => {
   return (
     <nav className=" bg-[#124C5F]  w-[19rem]  max-h-screen hidden  md:flex flex-col justify-stretch ">
