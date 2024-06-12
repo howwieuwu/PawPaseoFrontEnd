@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 import UsuG from "@/../public/icon/objects.png";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+
+// Iconos
 import { RiHome2Line } from "react-icons/ri";
 
 const ArrayElements = [
@@ -27,15 +30,20 @@ const ArrayElements = [
   },
 
   {
-    name: "Preguntas",
+    name: "Preguntas Frecuentes",
     Icon: RiHome2Line,
     link: "/dashboard/preguntas",
   },
 ];
 
-export const Sidebar = () => {
+export const SidebarMobile = ({ open }) => {
   return (
-    <nav className=" bg-[#124C5F]  w-[19rem]  max-h-screen hidden  md:flex flex-col justify-stretch ">
+    <nav
+      className={cn(
+        "absolute z-50 -left-[100%] top-0 bottom-0 bg-[#124C5F]  w-[19rem]  max-h-screen flex md:hidden flex-col justify-stretch transition-all duration-500 ease-in-out border-r",
+        open ? "left-0" : "-left-[100%]"
+      )}
+    >
       <div className="w-full  grid place-content-center gap-8 py-5">
         <Image src={UsuG} width={150} className="object-cover" height={150}></Image>
         <Link href={"/dashboard/editarPerfil"}>
