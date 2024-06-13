@@ -6,10 +6,47 @@ import Link from "next/link";
 import { Celular } from "./componentcelular/Celular";
 import Image from "next/image";
 import celular from "@/../public/image/celular.png"
+import { cn } from "@/lib/utils";
 
-export const Main = () => {
+export const Main = ({ open, setOpen }) => {
   return (
     <main className="mt-3 flex max-sm:flex-col max-sm:mt-7 xl:max-w-full max-lg:h-[85vh] max-xl:h-[80vh] max-sm:h-[100vh] max-2xl:h-[85vh] 2xl:h-[90vh] items-center">
+        {open && (
+          <div className={cn(
+          "absolute flex top-16 right-0 justify-between items-end lg:hidden transition-all duration-500 ease-in-out bg-[#e2e1e1] p-4 rounded-lg")}>
+           <div>
+            <ul className=" text-center  text-lg">
+                        <li onClick={() => setOpen(false)}>
+                            <Link href="#inicio">
+                                <p>Inicio</p>
+                            </Link>
+                        </li>
+                        <li onClick={() => setOpen(false)}>
+                            <Link href="#servicios">
+                                <p>Nuestros Servicios</p>
+                            </Link>
+                        </li>
+                        <li onClick={() => setOpen(false)}>
+                            <Link href="#sobre">
+                                <p>Sobre la App</p>
+                            </Link>
+                        </li>
+                        <li onClick={() => setOpen(false)}>
+                            <Link href="#resenas">
+                                <p>Reseñas</p>
+                            </Link>
+                        </li>
+                    </ul>
+            <Link href={"/Inicio_sesion"} className="flex justify-center mt-4">
+              <button className="py-2.5 px-6 rounded-2xl bg-[#EEB154] text-sm text-white">
+                Iniciar Sesión
+              </button>
+            </Link>
+            </div>
+          </div>
+          
+
+        )}
 
       <section className=" w-full xl:w-2/4 flex justify-center 2xl:w-2/4 2xl:h-[80%]">
         <Image className="2xl:w-2/3"

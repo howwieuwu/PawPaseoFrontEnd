@@ -2,10 +2,11 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import Paw from "@/../public/image/Paw.png";
-import { RiMenu2Line } from "react-icons/ri";
+import { RiCloseFill, RiMenuFill } from "react-icons/ri";
 
-export const Header = () => {
-    
+
+export const Header = ({ setOpen, open }) => {
+
     return (
         <nav id="inicio" className="py-2 xl:py-5 w-full bg-[#e2e1e1] max-sm:h-[8vh]">
             <div className="flex items-center justify-between px-4 xl:px-6 mx-auto">
@@ -56,7 +57,17 @@ export const Header = () => {
 
                 {/* // Menu de Celular */}
                 <div className="lg:hidden ">
-                    <RiMenu2Line className="h-6 w-6 cursor-pointer " />
+                    {open ? (
+                        <RiCloseFill
+                            className="md:hidden h-6 w-6 cursor-pointer "
+                            onClick={() => setOpen(false)}
+                        />
+                    ) : (
+                        <RiMenuFill
+                            className="md:hidden h-6 w-6 cursor-pointer "
+                            onClick={() => setOpen(true)}
+                        />
+                    )}
                 </div>
             </div>
         </nav>
