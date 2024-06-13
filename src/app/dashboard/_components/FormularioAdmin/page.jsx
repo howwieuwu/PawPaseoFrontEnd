@@ -219,8 +219,8 @@ export default function Page() {
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg max-w-md w-full">
-            <h2 className="text-xl font-semibold mb-4">Editar Establecimiento</h2>
+          <div className="bg-white p-8 rounded-lg">
+            <h2 className="text-xl font-semibold mb-4">Editar Administrador</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block mb-2">Nombre:</label>
@@ -250,7 +250,7 @@ export default function Page() {
       {isModalOpenVer && administradorVer && (
          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
          <div className="bg-white p-8 rounded-lg">
-           <h2 className="text-xl font-semibold mb-4">Ver Usuario</h2>
+           <h2 className="text-xl font-semibold mb-4">Ver Administrador</h2>
            <form>
            <img className='w-60 h-40 rounded-xl mb-4' src={administradorVer.foto_perfil} alt={administradorVer.nombre} />
              <div className="mb-4">
