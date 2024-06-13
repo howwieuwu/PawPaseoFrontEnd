@@ -37,7 +37,7 @@ function AcercaDe() {
             transition: 'max-height 0.5s ease-in-out',
             maxHeight: mostrarNosotros ? '1000px' : '0',
           }}>
-            <section id="nosotros" className="w-[100%] flex items-center justify-center max-sm:h-auto max-lg:mt-14 max-xl:mt-14 max-2xl:mt-14">
+            <section id="nosotros" className="w-[100%] flex items-center justify-center max-sm:h-auto max-lg:mt-14 lg:mt-20 max-xl:mt-14 max-2xl:mt-14">
               <div className="w-[100%] h-[100%] flex items-center justify-center">
                 <div className="text-center w-[100%] ">
                   <h1 className="font-mono text-base font-bold flex justify-center max-sm:text-3xl max-lg:text-4xl max-xl:text-4xl max-2xl:text-4xl 2xl:text-5xl" >Nosotros</h1>

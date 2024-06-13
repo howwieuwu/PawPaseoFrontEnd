@@ -14,15 +14,15 @@ export const Servicios = () => {
                                 key={service.id}
                                 className="p-4 flex h-full py-5 xl:py-6 flex-col gap-3 items-center justify-center bg-white rounded  w-full xl:w-60 px-8  "
                             >
-                                <Image
+                                {/* <Image
                                     width={100}
                                     height={100}
                                     src={service.image}
                                     className="w-2/3 h-2/3  object-contain"
                                     alt="service"
-                                />
-
-                                <p className="text-base max-sm:text-base 2xl:text-xl font-normal">{service.title}</p>
+                                /> */}
+                                <service.icon size={40} className="w-2/3 h-2/3  object-contain" />
+                                <p className="text-base text-center max-sm:text-base 2xl:text-xl font-normal">{service.title}</p>
                             </div>
                         );
                     })}

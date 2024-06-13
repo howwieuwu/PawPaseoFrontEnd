@@ -1,31 +1,35 @@
+import { FaHome, FaWalking } from 'react-icons/fa';
+import { FaMapLocationDot } from "react-icons/fa6";
+import { SiHomeassistantcommunitystore } from 'react-icons/si';
+
 export const Services = [
     {
         id: 1,
-        title: "Lorem lol",
-        image: "/serviceIcons/1.png",
+        title: "Ubicacion Tiempo Real",
+        icon: FaMapLocationDot,
     },
 
     {
         id: 2,
-        title: "Lorem lol",
-        image: "/serviceIcons/2.png",
+        title: "Servicio conveniente a la puerta de tu casa",
+        icon: FaHome,
     },
 
     {
         id: 3,
-        title: "Lorem lol",
-        image: "/serviceIcons/3.png",
+        title: "Ubicacion de guarderias y veterinarias cercanas",
+        icon: SiHomeassistantcommunitystore,
     },
 
     {
         id: 4,
-        title: "Lorem lol",
-        image: "/serviceIcons/4.png",
+        title: "Personalización de paseos",
+        icon: FaWalking,
     },
 
-    {
+    /* {
         id: 5,
-        title: "Lorem lol",
-        image: "/serviceIcons/5.png",
-    },
+        title: "Car Service",
+        icon: FaCar,
+    }, */
 ];
