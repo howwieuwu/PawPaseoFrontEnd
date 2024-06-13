@@ -27,7 +27,7 @@ function Page() {
 
         const updatedData = {
             nombre: event.target.nombre.value,
-            apellido: event.target.apellido.value,
+            /* telefono: event.target.telefono.value, */
             email: event.target.correo.value,
             ciudad: event.target.ciudad.value,
             contraseña: event.target.contraseña.value
