@@ -95,7 +95,7 @@ function LoginPage() {
       </section>
       {/* Sección derecha */}
       <section className="max-md:w-1/2 max-sm:w-1/2 max-lg:w-1/2 max-xl:w-1/2 max-2xl:w-1/2 2xl:w-1/2 h-full max-sm:hidden bg-gray-100">
-        <Image src={Girl} width={756} height={500} className="w-full object-cover" />
+        <Image src={Girl} width={756} height={500} alt="ChichaConSuPerro" className="w-full object-cover" />
       </section>
 
       {isModalOpen && (
