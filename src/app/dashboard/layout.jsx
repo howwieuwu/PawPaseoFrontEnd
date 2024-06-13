@@ -1,17 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./_components/Header";
 import { Sidebar } from "./_components/Sidebar";
 import { SidebarMobile } from "./_components/Sidebar-Mobile";
-// import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function DashboardLayout({ children }) {
   const [open, setOpen] = useState(false);
+  
 
-  // const {data } =  getlocalStorage('user')
-  // if(!data){
-  //   redirect('/login')
-  // }
+  useEffect(() => {
+    const adminData = sessionStorage.getItem('identifier');
+    if (!adminData) {
+      redirect('/Inicio_sesion');
+    } 
+  }, []);
 
   return (
     <>

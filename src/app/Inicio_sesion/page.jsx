@@ -27,6 +27,7 @@ function LoginPage() {
         },
         console.log(identifier)
       );
+      sessionStorage.setItem('identifier', JSON.stringify(response.data));
       router.push("/dashboard");
     } catch (error) {
       setError("Credenciales inválidas. Por favor, intente nuevamente.");
