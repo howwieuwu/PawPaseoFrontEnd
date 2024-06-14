@@ -4,10 +4,10 @@ import Image from "next/image";
 import { RiMenuFill } from "react-icons/ri";
 import { RiCloseFill } from "react-icons/ri";
 
-function HeaderAdmin({ setOpen, open }) {
+function HeaderAdmin({ setOpen, open, userData }) {
   return (
     <header className="flex items-center justify-between h-14 px-4  md:h-20 bg-[#e2e1e1] w-full ">
-      <h1 className="font-bold txt-xl md:text-3xl ">Bienvenido, Nick</h1>
+      <h1 className="font-bold txt-xl md:text-3xl ">Bienvenido, {userData?.nombre}</h1>
       <div className="flex-1"></div>
       <picture className=" hidden md:flex text-[#FFB749] font-bold text-md md:text-2xl  items-center">
         Paw<span className="text-[#124C5F] font-bold">-Paseo</span>

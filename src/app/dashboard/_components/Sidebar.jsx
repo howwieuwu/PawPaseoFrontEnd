@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Iconos
-import { RiHome2Fill} from "react-icons/ri";
+import { RiHome2Fill } from "react-icons/ri";
 import { FaQuestion, FaUser, FaUserTie, FaWalking } from "react-icons/fa";
 
 const ArrayElements = [
@@ -36,10 +36,13 @@ const ArrayElements = [
   },
 ];
 export const Sidebar = () => {
+
+
+
   return (
     <nav className=" bg-[#124C5F]  w-[19rem]  max-h-screen hidden  md:flex flex-col justify-stretch ">
       <div className="w-full  grid place-content-center gap-8 py-5">
-        <Image src={UsuG} width={150} className="object-cover" height={150}></Image>
+        <Image src={UsuG} width={150} className="object-cover" height={150} alt="Logo" />
         <Link href={"/dashboard/editarPerfil"}>
           <button className="bg-[#FFB749] px-4 py-1 rounded-lg"> Editar Perfil </button>
         </Link>
