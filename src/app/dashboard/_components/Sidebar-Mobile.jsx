@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
-import UsuG from "@/../public/icon/OBJECTS.png";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrayElements } from "@/constants/ArrayElements";
+import { useStore } from "zustand";
 
 export const SidebarMobile = ({ open }) => {
   const saveAdmin = useStore((state) => state.sesionUser);
