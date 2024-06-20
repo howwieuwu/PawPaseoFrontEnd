@@ -36,6 +36,7 @@ export default function Page() {
 
   const alertcancel = () => {
     setIsModalOpen(false);
+    setIsModalGrafica(false);
     Swal.fire({
       position: "center",
       icon: "error",
