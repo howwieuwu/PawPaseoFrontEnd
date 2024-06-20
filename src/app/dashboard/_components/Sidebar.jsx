@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/alt-text */
-import UsuG from "@/../public/icon/OBJECTS.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useStore } from "@/context/store";
