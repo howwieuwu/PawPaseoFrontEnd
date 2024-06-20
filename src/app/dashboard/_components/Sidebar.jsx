@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useStore } from "@/context/store";
 import { ArrayElements } from "@/constants/ArrayElements";
-import { useState } from "react";
 
 export const Sidebar = () => {
   const saveAdmin = useStore((state) => state.sesionUser);
