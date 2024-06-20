@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrayElements } from "@/constants/ArrayElements";
-import { useStore } from "zustand";
+import { useStore } from "@/context/store";
+
 
 export const SidebarMobile = ({ open }) => {
   const saveAdmin = useStore((state) => state.sesionUser);
@@ -70,3 +71,4 @@ export const SidebarMobile = ({ open }) => {
     </nav>
   );
 };
+
