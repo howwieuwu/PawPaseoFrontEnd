@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BiShow } from "react-icons/bi";
-import { FaSearch } from "react-icons/fa";
+import { FaRegStar, FaSearch, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { TbEdit } from "react-icons/tb";
 import { SiDatadog } from "react-icons/si";
 import Swal from 'sweetalert2';
+import { GoGraph } from "react-icons/go";
+import GraficaPaseador from "@/app/dashboard/_components/GraficoPaseador/page.jsx"
 
 export default function Page() {
   const [paseadores, setPaseadores] = useState([]);
@@ -15,6 +17,7 @@ export default function Page() {
   const [isModalOpenVer, setIsModalOpenVer] = useState(false);
   const [paseadorVer, setPaseadorVer] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalGrafica, setIsModalGrafica] = useState(false);
 
   const [rowsPerPage] = useState(7); 
   const [totalPages, setTotalPages] = useState(0);
@@ -22,7 +25,7 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://prueba-backend-phi.vercel.app/api/paseadores');
+      const response = await axios.get('https://pawpaseo-backend-phi.vercel.app/api/paseadores');
       setPaseadores(response.data.walkerFound);
       setTotalPages(Math.ceil(response.data.walkerFound.length / rowsPerPage));
     } catch (error) {
@@ -51,7 +54,7 @@ export default function Page() {
   });
 
   useEffect(() => {
-    axios.get('https://prueba-backend-phi.vercel.app/api/paseadores')
+    axios.get('https://pawpaseo-backend-phi.vercel.app/api/paseadores')
       .then(response => {
         setLoading(false);
         if (Array.isArray(response.data.walkerFound)) {
@@ -70,7 +73,7 @@ export default function Page() {
 
   const toggleActivo = (id, estadoActual) => {
     const nuevoEstado = !estadoActual;
-    axios.put(`https://prueba-backend-phi.vercel.app/api/paseador/${id}`, { estado: nuevoEstado })
+    axios.put(`https://pawpaseo-backend-phi.vercel.app/api/paseador/${id}`, { estado: nuevoEstado })
       .then(response => {
         setPaseadores(paseadores.map(paseador =>
           paseador._id === id ? { ...paseador, estado: nuevoEstado } : paseador
@@ -103,7 +106,7 @@ export default function Page() {
   };
 
   const updatePaseador = (id, updatedData) => {
-    axios.put(`https://prueba-backend-phi.vercel.app/api/paseador/${id}`, updatedData)
+    axios.put(`https://pawpaseo-backend-phi.vercel.app/api/paseador/${id}`, updatedData)
       .then(response => {
         setPaseadores(paseadores.map(paseador => paseador._id === id ? { ...paseador, ...updatedData } : paseador));
         setIsModalOpen(false);
@@ -137,6 +140,22 @@ export default function Page() {
     currentPage * rowsPerPage
   );
 
+  const getIconByCalificacion = (calificacion) => {
+    switch (calificacion) {
+      case 0:
+      case 1:
+        return <FaRegStar />;  // Unstarred icon for low rating
+      case 2:
+      case 3:
+        return <FaStarHalfAlt />;  // Half star for mid rating
+      case 4:
+      case 5:
+        return <FaStar />;  // Full star for good rating
+      default:
+        return <FaStar />;  // Default icon
+    }
+  };
+
   if (loading) {
 
     return <div className='flex justify-center items-center animate-pulse'> 
@@ -168,7 +187,7 @@ export default function Page() {
             <th scope="col" className="px-6 py-3">#</th>
             <th scope="col" className="px-6 py-3">Nombre</th>
             <th scope="col" className="px-6 py-3">Telefono</th>
-            <th scope="col" className="px-6 py-3">Ciudad</th>
+            <th scope="col" className="px-6 py-3">Calificación</th>
             <th scope="col" className="px-6 py-3">Correo</th>
             <th scope="col" className="px-6 py-3">Estado</th>
             <th scope="col" className="px-6 py-3">Acción</th>
@@ -181,7 +200,10 @@ export default function Page() {
               <td>{(currentPage - 1) * rowsPerPage + index + 1}</td>
               <td>{paseador.nombre}</td>
               <td>{paseador.telefono}</td>
-              <td>{paseador.ciudad || "No se ha digitado la ciudad"}</td>
+              <td className="flex items-center justify-center">
+                  {getIconByCalificacion(paseador.calificacion)}
+                  <span className="ml-1">{paseador.calificacion}</span>
+                </td>
               <td>{paseador.email}</td>
               <td>
                 <button
@@ -194,6 +216,7 @@ export default function Page() {
               <td className='flex justify-center'>
                 <BiShow className='h-8 w-8 cursor-pointer' onClick={() => handleView(paseador)}/>
                 <TbEdit className='h-8 w-8 cursor-pointer ml-2' onClick={() => handleEdit(paseador)} />
+                <GoGraph className='h-8 w-8 cursor-pointer ml-2' onClick={setIsModalGrafica} />
               </td>
             </tr>
           ))}
@@ -214,6 +237,15 @@ export default function Page() {
           className="px-4 py-2 mx-2 bg-[#FFB749] rounded-full disabled:opacity-50 text-white ml-12"
         > Siguiente </button>
       </div>
+
+      { isModalGrafica && (
+        <div className='fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50'>
+          <div className="bg-white p-8 rounded-lg w-11/12 h-2/3"> 
+          <GraficaPaseador />
+          </div>
+        </div>
+      )
+      }
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -251,6 +283,8 @@ export default function Page() {
            <h2 className="text-xl font-semibold mb-4">Ver Cuidador</h2>
            <form>
            <img className='w-60 h-40 rounded-xl' src={paseadorVer.foto_perfil} alt={paseadorVer.nombre} />
+           <text className='flex items-center justify-center'>{getIconByCalificacion(paseadorVer.calificacion)}
+                  <span className="ml-1">{paseadorVer.calificacion}</span></text>
              <div className="mb-4">
                <label className="block mb-2">Nombre:</label>
                <input type="text" name="nombre" value={paseadorVer.nombre} readOnly className="p-2 border rounded w-full" />
