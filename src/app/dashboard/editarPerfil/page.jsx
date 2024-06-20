@@ -1,57 +1,52 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useStore } from "@/context/store";
 import Image from "next/image";
-import UsuG from "@/../public/icon/OBJECTS.png";
+import { useEffect, useState } from "react";
 import { SiDatadog } from "react-icons/si";
-import axios from "axios";
+import { UpdateUser } from "@/api/update-user";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 function Page() {
-  const [admin, setAdmin] = useState({});
   const [loading, setLoading] = useState(true);
+  const sesionUser = useStore((state) => state.sesionUser);
+  const setSesionUser = useStore((state) => state.setSesionUser);
 
-  const [infoUser, setInfoUser] = useState({});
+  const router = useRouter();
+
+  // Manejo de formulario
+  const [dataUpdate, setDataUpdate] = useState({
+    nombre: sesionUser.nombre,
+    email: sesionUser.email,
+    ciudad: sesionUser.email,
+    password: "123456",
+  });
+
+  console.log(dataUpdate);
 
   useEffect(() => {
-    // axios
-    //   .get("https://prueba-backend-phi.vercel.app/admin/profile", {
-    //     withCredentials: true,
-    //   })
-    //   .then((response) => {
-    //     setAdmin(response.data);
-    //     setLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching admin data:", error);
-    //     setLoading(false);
-    //   });
+    setTimeout(() => {
+      setLoading(false);
+    }, 200);
 
-    const adminData = sessionStorage.getItem("identifier");
-    setInfoUser(JSON.parse(adminData));
-    setLoading(false);
+    clearTimeout();
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const response = await UpdateUser(dataUpdate);
+    setSesionUser(response);
 
-    const updatedData = {
-      nombre: event.target.nombre.value,
-      /* telefono: event.target.telefono.value, */
-      email: event.target.correo.value,
-      ciudad: event.target.ciudad.value,
-      contraseña: event.target.contraseña.value,
-    };
-    axios
-      .put(
-        `https://prueba-backend-phi.vercel.app/admin/update/${admin._id}`,
-        updatedData,
-        { withCredentials: true }
-      )
-      .then((response) => {
-        console.log("Admin updated:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error updating admin:", error);
-      });
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Actualizado con exito",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    router.push("/dashboard");
+    // si llega una respuesta hacer un Swal que diga actualizado con exito
   };
 
   if (loading) {
@@ -72,13 +67,17 @@ function Page() {
           {" "}
           Editar Perfil{" "}
         </h1>
-        <Image
-          src={UsuG}
-          width={150}
-          height={150}
-          className="object-cover"
-          alt="Admin Image"
-        />
+        {sesionUser?.foto_perfil ? (
+          <Image
+            src={sesionUser?.foto_perfil}
+            width={150}
+            height={150}
+            className="object-cover h-[150px] w-[150px] rounded-full shadow"
+            alt="Admin Image"
+          />
+        ) : (
+          <div className="w-[150px] h-[150px] bg-gray-200 rounded-full animate-pulse"></div>
+        )}
       </div>
       <div className="w-full mt-3">
         <form onSubmit={handleSubmit}>
@@ -87,7 +86,8 @@ function Page() {
             <input
               type="text"
               name="nombre"
-              defaultValue={infoUser.nombre}
+              onChange={(e) => setDataUpdate({ ...dataUpdate, nombre: e.target.value })}
+              defaultValue={dataUpdate?.nombre}
               className="p-2 border rounded w-full"
             />
           </div>
@@ -96,7 +96,8 @@ function Page() {
             <input
               type="email"
               name="correo"
-              defaultValue={infoUser.email}
+              defaultValue={dataUpdate?.email}
+              onChange={(e) => setDataUpdate({ ...dataUpdate, email: e.target.value })}
               className="p-2 border rounded w-full"
             />
           </div>
@@ -105,7 +106,8 @@ function Page() {
             <input
               type="text"
               name="ciudad"
-              defaultValue={admin.ciudad}
+              defaultValue={dataUpdate?.ciudad}
+              onChange={(e) => setDataUpdate({ ...dataUpdate, ciudad: e.target.value })}
               className="p-2 border rounded w-full"
             />
           </div>
@@ -114,8 +116,10 @@ function Page() {
             <input
               type="password"
               name="contraseña"
-              defaultValue={admin.contraseña}
+              required
+              onChange={(e) => setDataUpdate({ ...dataUpdate, password: e.target.value })}
               className="p-2 border rounded w-full"
+              defaultValue={dataUpdate?.password}
             />
           </div>
           <div className="flex justify-center">

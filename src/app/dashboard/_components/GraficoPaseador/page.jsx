@@ -60,7 +60,7 @@ function Page() {
         plugins: {
             title: {
                 display: true,
-                text: 'Gráfico de Ejemplo',
+                text: 'Calificaci+on por Paseo',
                 font: {
                     size: 16
                 }

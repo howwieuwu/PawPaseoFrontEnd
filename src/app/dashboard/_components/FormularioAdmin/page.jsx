@@ -22,7 +22,7 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://prueba-backend-phi.vercel.app/admin/data');
+      const response = await axios.get('https://pawpaseo-backend-phi.vercel.app/admin/data');
       setAdministradores(response.data.adminFound);
       setTotalPages(Math.ceil(response.data.adminFound.length / rowsPerPage));
     } catch (error) {
@@ -51,7 +51,7 @@ export default function Page() {
   });
 
   useEffect(() => {
-    axios.get('https://prueba-backend-phi.vercel.app/admin/data')
+    axios.get('https://pawpaseo-backend-phi.vercel.app/admin/data')
       .then(response => {
         setLoading(false);
         if (Array.isArray(response.data.paseadorFound)) {
@@ -70,7 +70,7 @@ export default function Page() {
 
   const toggleActivo = (id, estadoActual) => {
     const nuevoEstado = !estadoActual;
-    axios.put(`https://prueba-backend-phi.vercel.app/admin/update/${id}`, { estado: nuevoEstado })
+    axios.put(`https://pawpaseo-backend-phi.vercel.app/admin/update/${id}`, { estado: nuevoEstado })
       .then(response => {
         setAdministradores(administradores.map(administrador =>
           administrador._id === id ? { ...administrador, estado: nuevoEstado } : administrador
@@ -104,7 +104,7 @@ export default function Page() {
   };
 
   const updateAdministrador = (id, updatedData) => {
-    axios.put(`https://prueba-backend-phi.vercel.app/admin/update/${id}`, updatedData)
+    axios.put(`https://pawpaseo-backend-phi.vercel.app/admin/update/${id}`, updatedData)
       .then(response => {
         setAdministradores(administradores.map(administrador => administrador._id === id ? { ...administrador, ...updatedData } : administrador));
         setIsModalOpen(false);

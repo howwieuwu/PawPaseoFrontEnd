@@ -22,7 +22,7 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://prueba-backend-phi.vercel.app/api/preguntas');
+      const response = await axios.get('https://pawpaseo-backend-phi.vercel.app/api/preguntas');
       setPreguntas(response.data.preguntaFound);
       setTotalPages(Math.ceil(response.data.preguntaFound.length / rowsPerPage));
     } catch (error) {
@@ -76,7 +76,7 @@ export default function Page() {
   };
 
   const updatePregunta = (id, updatedData) => {
-    axios.put(`https://prueba-backend-phi.vercel.app/api/pregunta/${id}`, updatedData)
+    axios.put(`https://pawpaseo-backend-phi.vercel.app/api/pregunta/${id}`, updatedData)
       .then(response => {
         setPreguntas(preguntas.map(pregunta => pregunta._id === id ? { ...pregunta, ...updatedData } : pregunta));
         setIsModalOpen(false);

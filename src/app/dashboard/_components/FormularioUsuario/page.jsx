@@ -23,7 +23,7 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://prueba-backend-phi.vercel.app/api/usuarios');
+      const response = await axios.get('https://pawpaseo-backend-phi.vercel.app/api/usuarios');
       setUsuarios(response.data.userFound);
       setTotalPages(Math.ceil(response.data.userFound.length / rowsPerPage));
     } catch (error) {
@@ -52,7 +52,7 @@ export default function Page() {
   });
 
   useEffect(() => {
-    axios.get('https://prueba-backend-phi.vercel.app/api/usuarios')
+    axios.get('https://pawpaseo-backend-phi.vercel.app/api/usuarios')
       .then(response => {
         setLoading(false);
         if (Array.isArray(response.data.userFound)) {
@@ -71,7 +71,7 @@ export default function Page() {
 
   const toggleActivo = (id, estadoActual) => {
     const nuevoEstado = !estadoActual;
-    axios.put(`https://prueba-backend-phi.vercel.app/api/usuario/${id}`, { estado: nuevoEstado })
+    axios.put(`https://pawpaseo-backend-phi.vercel.app/api/usuario/${id}`, { estado: nuevoEstado })
       .then(response => {
         setUsuarios(usuarios.map(usuario =>
           usuario._id === id ? { ...usuario, estado: nuevoEstado } : usuario
@@ -110,7 +110,7 @@ export default function Page() {
   };
 
   const updateUsuario = (id, updatedData) => {
-    axios.put(`https://prueba-backend-phi.vercel.app/api/usuario/${id}`, updatedData)
+    axios.put(`https://pawpaseo-backend-phi.vercel.app/api/usuario/${id}`, updatedData)
       .then(response => {
         setUsuarios(usuarios.map(usuario => usuario._id === id ? { ...usuario, ...updatedData } : usuario));
         setIsModalOpen(false);

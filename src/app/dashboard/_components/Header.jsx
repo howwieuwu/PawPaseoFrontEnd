@@ -3,11 +3,18 @@ import Paw from "@/../public/image/Paw.png";
 import Image from "next/image";
 import { RiMenuFill } from "react-icons/ri";
 import { RiCloseFill } from "react-icons/ri";
+import { useStore } from "@/context/store";
 
-function HeaderAdmin({ setOpen, open, userData }) {
+function HeaderAdmin({ setOpen, open }) {
+  const dataAdmin = useStore((state) => state.sesionUser);
+
   return (
     <header className="flex items-center justify-between h-14 px-4  md:h-20 bg-[#e2e1e1] w-full ">
-      <h1 className="font-bold txt-xl md:text-3xl ">Bienvenido, {userData?.nombre}</h1>
+      {dataAdmin?.nombre ? (
+        <h1 className="font-bold txt-xl md:text-3xl ">Bienvenido ,{dataAdmin?.nombre}</h1>
+      ) : (
+        <div className="w-64 h-10 bg-gray-300 animate-pulse "></div>
+      )}
       <div className="flex-1"></div>
       <picture className=" hidden md:flex text-[#FFB749] font-bold text-md md:text-2xl  items-center">
         Paw<span className="text-[#124C5F] font-bold">-Paseo</span>
@@ -36,3 +43,4 @@ function HeaderAdmin({ setOpen, open, userData }) {
 }
 
 export default HeaderAdmin;
+
