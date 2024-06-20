@@ -25,7 +25,8 @@
     "sweetalert2": "^11.6.13",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "tw-elements-react": "^1.0.0-alpha2"
+    "tw-elements-react": "^1.0.0-alpha2",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
