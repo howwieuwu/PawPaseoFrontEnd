@@ -21,7 +21,7 @@ function LoginPage() {
     try {
       // axios.defaults.withCredentials = true;
       const response = await axios.post(
-        "https://prueba-backend-phi.vercel.app/admin/login",
+        "https://pawpaseo-backend-phi.vercel.app/admin/login",
         {
           identifier,
           password,

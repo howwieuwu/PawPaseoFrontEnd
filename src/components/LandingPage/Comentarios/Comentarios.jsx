@@ -11,7 +11,7 @@ export const Comentarios = () => {
     useEffect(() => {
         const fetchComentarios = async () => {
             try {
-                const response = await fetch('https://prueba-backend-phi.vercel.app/api/resenas');
+                const response = await fetch('https://pawpaseo-backend-phi.vercel.app/api/resenas');
                 const data = await response.json();
                 setComentarios(data.resenaFound);
             } catch (error) {
@@ -21,7 +21,7 @@ export const Comentarios = () => {
 
         const fetchUsuarios = async () => {
             try {
-                const response = await fetch('https://prueba-backend-phi.vercel.app/api/usuarios');
+                const response = await fetch('https://pawpaseo-backend-phi.vercel.app/api/usuarios');
                 const data = await response.json();
                 setUsuarios(data.userFound);
             } catch (error) {

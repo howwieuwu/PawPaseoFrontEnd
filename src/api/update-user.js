@@ -3,7 +3,7 @@ export const UpdateUser = async (dataUpdate) => {
   const id = JSON.parse(localData).id;
 
   const response = await fetch(
-    `https://prueba-backend-phi.vercel.app/admin/update/${id}`,
+    `https://pawpaseo-backend-phi.vercel.app/admin/update/${id}`,
     {
       method: "PUT",
       headers: {
