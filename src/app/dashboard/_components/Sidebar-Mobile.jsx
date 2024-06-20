@@ -3,44 +3,16 @@ import UsuG from "@/../public/icon/OBJECTS.png";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-
-// Iconos
-import { RiHome2Fill } from "react-icons/ri";
-import { FaUserTie } from "react-icons/fa";
-import { FaWalking } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
-import { FaQuestion } from "react-icons/fa";
-
-const ArrayElements = [
-  {
-    name: "Home",
-    Icon: RiHome2Fill,
-    link: "/dashboard",
-  },
-  {
-    name: "Administradores",
-    Icon: FaUserTie,
-    link: "/dashboard/administradores",
-  },
-  {
-    name: "Cuidadores",
-    Icon: FaWalking,
-    link: "/dashboard/cuidadores",
-  },
-  {
-    name: "Usuarios",
-    Icon: FaUser,
-    link: "/dashboard/usuarios",
-  },
-
-  {
-    name: "Preguntas Frecuentes",
-    Icon: FaQuestion,
-    link: "/dashboard/preguntas",
-  },
-];
+import { ArrayElements } from "@/constants/ArrayElements";
 
 export const SidebarMobile = ({ open }) => {
+  const saveAdmin = useStore((state) => state.sesionUser);
+  const [activeView, setActiveView] = useState("");
+
+  const handleSetActive = (name) => {
+    setActiveView(name);
+  };
+
   return (
     <nav
       className={cn(
@@ -49,7 +21,17 @@ export const SidebarMobile = ({ open }) => {
       )}
     >
       <div className="w-full  grid place-content-center gap-8 py-5">
-        <Image src={UsuG} width={150} className="object-cover" height={150} alt="Logo" />
+        {saveAdmin?.foto_perfil ?(
+          <Image
+          src={saveAdmin.foto_perfil}
+          width={150}
+          className="object-cover rounded-full h-[150px] w-[150px] "
+          height={150}
+          alt="Logo"
+        />
+        ) : (
+          <div className="w-[150px] h-[150px] bg-gray-200 rounded-full animate-pulse"></div>
+        )}
         <Link href={"/dashboard/editarPerfil"}>
           <button className="bg-[#FFB749] px-4 py-1 rounded-lg"> Editar Perfil </button>
         </Link>
@@ -59,15 +41,20 @@ export const SidebarMobile = ({ open }) => {
           <ul className="flex flex-col  gap-2">
             {ArrayElements.map(({ name, Icon, link }) => (
               <Link
-                href={link}
-                key={name}
-                className="hover:bg-[#124C5F] p-4 hover:text-white transition-colors rounded-lg"
-              >
-                <li key={name} className="flex gap-2">
-                  <Icon className="w-5 h-5 object-cover" />
-                  <span>{name}</span>
-                </li>
-              </Link>
+              href={link}
+              key={name}
+              className={`p-4 rounded-lg transition-colors ${
+                activeView === name
+                  ? "bg-[#124C5F] text-white"
+                  : "hover:bg-[#124C5F] hover:text-white"
+              }`}
+              onClick={() => handleSetActive(name)} // Actualiza la vista activa al hacer clic
+            >
+              <li key={name} className="flex gap-2">
+                <Icon className="w-5 h-5 object-cover" />
+                <span>{name}</span>
+              </li>
+            </Link>
             ))}
           </ul>
         </div>
