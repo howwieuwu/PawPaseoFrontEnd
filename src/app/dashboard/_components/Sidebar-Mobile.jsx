@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
+"use client";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
