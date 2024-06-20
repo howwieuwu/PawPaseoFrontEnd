@@ -1,11 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
+"use client"
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useStore } from "@/context/store";
 import { ArrayElements } from "@/constants/ArrayElements";
+import { useState } from "react";
 
 export const Sidebar = () => {
   const saveAdmin = useStore((state) => state.sesionUser);
+  const [activeView, setActiveView] = useState("");
+
+  const handleSetActive = (name) => {
+    setActiveView(name);
+  };
 
   return (
     <nav className=" bg-[#124C5F]  w-[19rem]  max-h-screen hidden  md:flex flex-col justify-stretch ">
@@ -31,15 +39,20 @@ export const Sidebar = () => {
           <ul className="flex flex-col  gap-2">
             {ArrayElements.map(({ name, Icon, link }) => (
               <Link
-                href={link}
-                key={name}
-                className="hover:bg-[#124C5F] p-4 hover:text-white transition-colors rounded-lg"
-              >
-                <li key={name} className="flex gap-2">
-                  <Icon className="w-5 h-5 object-cover" />
-                  <span>{name}</span>
-                </li>
-              </Link>
+              href={link}
+              key={name}
+              className={`p-4 rounded-lg transition-colors ${
+                activeView === name
+                  ? "bg-[#124C5F] text-white"
+                  : "hover:bg-[#124C5F] hover:text-white"
+              }`}
+              onClick={() => handleSetActive(name)} // Actualiza la vista activa al hacer clic
+            >
+              <li key={name} className="flex gap-2">
+                <Icon className="w-5 h-5 object-cover" />
+                <span>{name}</span>
+              </li>
+            </Link>
             ))}
           </ul>
         </div>
