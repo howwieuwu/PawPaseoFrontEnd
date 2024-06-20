@@ -81,7 +81,7 @@ function Page() {
         }
 
         return () => {
-            if (chartRef.current.chart) {
+            if (chartRef.current && chartRef.current.chart) {
                 chartRef.current.chart.destroy();
             }
         };
