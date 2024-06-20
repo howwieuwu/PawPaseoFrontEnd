@@ -243,6 +243,7 @@ export default function Page() {
           <div className="bg-white p-8 rounded-lg w-11/12 h-2/3"> 
           <GraficaPaseador />
           </div>
+          <button type="button" onClick={() => setIsModalOpenVer(false)} className="mr-4 py-2 px-4 bg-[#124C5F] text-white rounded">Cerrar</button>
         </div>
       )
       }
