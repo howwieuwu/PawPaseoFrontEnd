@@ -242,8 +242,8 @@ export default function Page() {
         <div className='fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50'>
           <div className="bg-white p-8 rounded-lg w-11/12 h-2/3"> 
           <GraficaPaseador />
+          <button type="button" onClick={alertcancel} className="mr-4 py-2 px-4 bg-gray-500 text-white rounded">Cancelar</button>
           </div>
-          <button type="button" onClick={() => setIsModalOpenVer(false)} className="mr-4 py-2 px-4 bg-[#124C5F] text-white rounded">Cerrar</button>
         </div>
       )
       }
