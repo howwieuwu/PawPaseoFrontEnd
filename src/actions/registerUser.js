@@ -16,13 +16,6 @@ export const RegisterUserAction = async (formData) => {
       body: JSON.stringify(DataforBackend),
     }
   );
-  const resp = await fetch("https://pawpaseo-backend-phi.vercel.app/api/usuario", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(DataforBackend),
-  });
 
   const respData = await resp.json();
 
