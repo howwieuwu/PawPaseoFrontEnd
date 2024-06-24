@@ -1,4 +1,4 @@
-export const UpdateUser = async (dataUpdate) => {
+export const UpdateUser = async (formData) => {
   const localData = localStorage.getItem("identifier");
   const id = JSON.parse(localData).id;
 
@@ -6,13 +6,9 @@ export const UpdateUser = async (dataUpdate) => {
     `https://pawpaseo-backend-phi.vercel.app/admin/update/${id}`,
     {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataUpdate),
+      body: formData,
     }
   );
   const result = await response.json();
-
   return result;
 };

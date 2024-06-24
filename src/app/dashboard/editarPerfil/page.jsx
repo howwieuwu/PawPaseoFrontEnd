@@ -1,7 +1,7 @@
 "use client";
 import { useStore } from "@/context/store";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SiDatadog } from "react-icons/si";
 import { UpdateUser } from "@/api/update-user";
 import { useRouter } from "next/navigation";
@@ -10,19 +10,29 @@ import Swal from "sweetalert2";
 function Page() {
   const [loading, setLoading] = useState(true);
   const sesionUser = useStore((state) => state.sesionUser);
+
   const setSesionUser = useStore((state) => state.setSesionUser);
 
   const router = useRouter();
+  const fileInputRef = useRef(null);
+  const [imagen, setImagen] = useState(sesionUser.foto_perfil);
 
   // Manejo de formulario
-  const [dataUpdate, setDataUpdate] = useState({
-    nombre: sesionUser.nombre,
-    email: sesionUser.email,
-    ciudad: sesionUser.email,
-    password: "123456",
-  });
+  const [dataUpdate, setDataUpdate] = useState({});
 
-  console.log(dataUpdate);
+  useEffect(() => {
+    setDataUpdate({
+      nombre: sesionUser?.nombre,
+      email: sesionUser?.email,
+      ciudad: sesionUser?.ciudad,
+      password: "123456",
+      foto_perfil: imagen,
+    });
+  }, [sesionUser]);
+
+  const handleClick = () => {
+    fileInputRef.current.click();
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,7 +44,16 @@ function Page() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await UpdateUser(dataUpdate);
+
+    // formData
+    const formData = new FormData();
+    formData.append("nombre", dataUpdate.nombre);
+    formData.append("email", dataUpdate.email);
+    formData.append("ciudad", dataUpdate.ciudad);
+    formData.append("password", dataUpdate.password);
+    formData.append("foto_perfil", imagen);
+
+    const response = await UpdateUser(formData);
     setSesionUser(response);
 
     Swal.fire({
@@ -54,7 +73,10 @@ function Page() {
       <div className="flex justify-center items-center animate-pulse">
         <div className=" h-full w-full mt-72 md:mt-20">
           <SiDatadog className="h-96 w-full" />
-          <h1 className="w-full flex text-center justify-center"> Cargando... </h1>
+          <h1 className="w-full flex text-center justify-center">
+            {" "}
+            Cargando...{" "}
+          </h1>
         </div>
       </div>
     );
@@ -68,13 +90,24 @@ function Page() {
           Editar Perfil{" "}
         </h1>
         {sesionUser?.foto_perfil ? (
-          <Image
-            src={sesionUser?.foto_perfil}
-            width={150}
-            height={150}
-            className="object-cover h-[150px] w-[150px] rounded-full shadow"
-            alt="Admin Image"
-          />
+          <>
+            <Image
+              src={sesionUser?.foto_perfil}
+              width={150}
+              height={150}
+              className="object-cover h-[150px] w-[150px] rounded-full shadow"
+              alt="Admin Image"
+              onClick={handleClick}
+              style={{ cursor: "pointer" }}
+            />
+
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={(e) => setImagen(e.target.files[0])}
+            />
+          </>
         ) : (
           <div className="w-[150px] h-[150px] bg-gray-200 rounded-full animate-pulse"></div>
         )}
@@ -86,7 +119,9 @@ function Page() {
             <input
               type="text"
               name="nombre"
-              onChange={(e) => setDataUpdate({ ...dataUpdate, nombre: e.target.value })}
+              onChange={(e) =>
+                setDataUpdate({ ...dataUpdate, nombre: e.target.value })
+              }
               defaultValue={dataUpdate?.nombre}
               className="p-2 border rounded w-full"
             />
@@ -97,7 +132,9 @@ function Page() {
               type="email"
               name="correo"
               defaultValue={dataUpdate?.email}
-              onChange={(e) => setDataUpdate({ ...dataUpdate, email: e.target.value })}
+              onChange={(e) =>
+                setDataUpdate({ ...dataUpdate, email: e.target.value })
+              }
               className="p-2 border rounded w-full"
             />
           </div>
@@ -107,7 +144,9 @@ function Page() {
               type="text"
               name="ciudad"
               defaultValue={dataUpdate?.ciudad}
-              onChange={(e) => setDataUpdate({ ...dataUpdate, ciudad: e.target.value })}
+              onChange={(e) =>
+                setDataUpdate({ ...dataUpdate, ciudad: e.target.value })
+              }
               className="p-2 border rounded w-full"
             />
           </div>
@@ -117,7 +156,9 @@ function Page() {
               type="password"
               name="contraseña"
               required
-              onChange={(e) => setDataUpdate({ ...dataUpdate, password: e.target.value })}
+              onChange={(e) =>
+                setDataUpdate({ ...dataUpdate, password: e.target.value })
+              }
               className="p-2 border rounded w-full"
               defaultValue={dataUpdate?.password}
             />
@@ -130,7 +171,10 @@ function Page() {
             >
               Cancelar
             </button>
-            <button type="submit" className="py-2 px-4 bg-blue-500 text-white rounded">
+            <button
+              type="submit"
+              className="py-2 px-4 bg-blue-500 text-white rounded"
+            >
               Actualizar
             </button>
           </div>

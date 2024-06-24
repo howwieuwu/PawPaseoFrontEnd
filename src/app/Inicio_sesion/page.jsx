@@ -87,7 +87,7 @@ function LoginPage() {
             >
               Iniciar Sesión
             </button>
-            <h5 className="text-center">
+            <h5 className="text-center cursor-pointer"  >
               ¿No tienes una cuenta? <u onClick={setIsModalOpen}>Regístrate</u>
             </h5>
             {error && <p className="text-red-500 text-center">{error}</p>}

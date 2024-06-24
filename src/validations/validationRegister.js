@@ -15,7 +15,7 @@ export const validation = (response) => {
     Swal.fire({
       icon: "error",
       title: "Error",
-      text: "El correo: ya está registrado en nuestro sistema.",
+      text: response.toString().toUpperCase(),
       timer: 5000,
       timerProgressBar: true,
       showConfirmButton: false,
