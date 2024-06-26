@@ -2,7 +2,6 @@
 import { useRef, useEffect } from 'react';
 import { Chart, BarController, LineController, BarElement, LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 
-// Registrar todos los componentes necesarios para la gráfica de barras
 Chart.register(BarController, BarElement, LineElement, PointElement, LineController, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 function Page() {
@@ -60,7 +59,7 @@ function Page() {
         plugins: {
             title: {
                 display: true,
-                text: 'Calificaci+on por Paseo',
+                text: 'Calificación por Paseo',
                 font: {
                     size: 16
                 }

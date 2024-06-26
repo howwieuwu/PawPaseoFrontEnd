@@ -73,7 +73,11 @@ function LoginPage() {
               onChange={(e) => setIdentifier(e.target.value)}
               required
             />
-            <h5 className="py-2">Contraseña:</h5>
+            <div className="flex justify-between py-2 items-center">
+            <h5 className="">Contraseña:</h5>
+            <u className="text-xs text-gray-400">Restablecer contraseña</u>
+            </div>
+            
             <input
               type="password"
               className="bg-[#8f8a8a] bg-opacity-25 rounded-2xl w-full h-10 px-4 mb-6"
@@ -125,7 +129,7 @@ function LoginPage() {
                 </Link>
                 <Link href={"/Registro/RegistroPaseador"}>
                   <button className="bg-[#D9D9D9] w-full h-[45px] rounded-3xl text-black my-2">
-                    Paseador/Cuidador
+                    Paseador
                   </button>
                 </Link>
                 <div className="flex justify-center">

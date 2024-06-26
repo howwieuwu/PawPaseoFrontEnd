@@ -15,12 +15,12 @@ export const Services = [
         icon: FaHome,
     },
 
-    {
+    /* {
         id: 3,
         title: "Ubicacion de guarderias y veterinarias cercanas",
         icon: SiHomeassistantcommunitystore,
     },
-
+ */
     {
         id: 4,
         title: "Personalización de paseos",

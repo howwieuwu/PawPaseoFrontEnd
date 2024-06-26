@@ -46,7 +46,7 @@ function Footer() {
                                     <PiFacebookLogoFill className="h-8 w-8 md:h-12 md:w-12 cursor-pointer" />
                                     <FaInstagram className=" h-8 w-8 md:h-12 md:w-12 cursor-pointer" />
                                     <FaTwitter className=" h-8 w-8 md:h-12 md:w-12 cursor-pointer" />
-                                    <FaWhatsapp className=" h-8 w-8 md:h-12 md:w-12 cursor-pointer" />
+                                 {/*    <FaWhatsapp className=" h-8 w-8 md:h-12 md:w-12 cursor-pointer" /> */}
                                 </div>
                             </nav>
 
@@ -65,10 +65,10 @@ function Footer() {
                         <p>2022 © ExitoWeb, Inc. Todos los derechos reservados.</p>
                         <p className='text-[13px]'>Términos de servicio</p>
 
-                        <div className='flex justify-center text-center text-[12px] h-10'>
+                       {/*  <div className='flex justify-center text-center text-[12px] h-10'>
                             <p className='underline'>Español</p>
                             <p className='ml-5 underline'>Ingles</p>
-                        </div>
+                        </div> */}
                     </nav>
                 </nav>
 
