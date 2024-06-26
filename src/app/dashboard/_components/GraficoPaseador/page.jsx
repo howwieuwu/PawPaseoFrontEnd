@@ -40,6 +40,7 @@ function Page() {
       const resp = data.filter((walker) => {
         return walker.id_paseador === activeWalker;
       });
+<<<<<<< HEAD
 
       console.log(resp);
       setHistorial(resp);
@@ -47,6 +48,13 @@ function Page() {
     });
   }, [activeWalker]);
 
+=======
+      setHistorial(resp);
+      setCalificacion(resp.map((paseo) => paseo.calificacion));
+    });
+  }, [activeWalker]);
+
+>>>>>>> 0481c1a6b085f0fa465175a4d2199f58c3bcbb57
   const data = {
     labels: ["Paseo N°1"],
     datasets: [
@@ -71,9 +79,13 @@ function Page() {
     ],
   };
 
+<<<<<<< HEAD
 
 
 const options = {
+=======
+  const options = {
+>>>>>>> 0481c1a6b085f0fa465175a4d2199f58c3bcbb57
     responsive: true,
     maintainAspectRatio: false,
     scales: {
@@ -106,6 +118,7 @@ const options = {
           size: 16,
         },
       },
+<<<<<<< HEAD
       tooltip: { // Corrección aquí: 'tooltip' en lugar de 'tooltips'
         enabled: true,
         callbacks: {
@@ -125,6 +138,8 @@ const options = {
           }
         }
       },
+=======
+>>>>>>> 0481c1a6b085f0fa465175a4d2199f58c3bcbb57
     },
   };
 
